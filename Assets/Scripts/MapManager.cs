@@ -48,7 +48,11 @@ namespace Map
         {
             if (CurrentMap == null) return;
 
-            var json = JsonConvert.SerializeObject(CurrentMap);
+            var json = JsonConvert.SerializeObject(CurrentMap, new JsonSerializerSettings()
+            {
+                Formatting = Formatting.Indented,
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            });
             PlayerPrefs.SetString("Map", json);
             PlayerPrefs.Save();
         }
